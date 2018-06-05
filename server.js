@@ -9,16 +9,27 @@ const io = socketIO(server);
 
 io.on("connection", socket => {
   console.log("User connected");
-  socket.join("main");
 
   socket.on("disconnect", () => {
-    console.log("user disconnected");
+    console.log("User disconnected");
+  });
+
+  socket.on("share", data => {
+    console.log(data);
+
+    socket.join(data.token);
+  });
+
+  socket.on("unshare", data => {
+    console.log("Unsharing");
+
+    socket.leave(data.token);
   });
 
   socket.on("question", data => {
     console.log(data);
 
-    socket.broadcast.to("main").emit("receive question", data);
+    socket.broadcast.to(data.token).emit("receive question", data);
   });
 });
 
