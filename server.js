@@ -15,20 +15,14 @@ io.on("connection", socket => {
   });
 
   socket.on("share", data => {
-    console.log(data);
-
     socket.join(data.token);
   });
 
   socket.on("unshare", data => {
-    console.log("Unsharing");
-
     socket.leave(data.token);
   });
 
   socket.on("question", data => {
-    console.log(data);
-
     socket.broadcast.to(data.token).emit("receive question", data);
   });
 });
