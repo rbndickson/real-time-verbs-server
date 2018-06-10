@@ -25,6 +25,10 @@ io.on("connection", socket => {
   socket.on("question", data => {
     socket.broadcast.to(data.token).emit("receive question", data);
   });
+
+  socket.on("toggle highlighted", data => {
+    socket.broadcast.to(data.token).emit("receive highlight", data);
+  });
 });
 
 server.listen(port, () => console.log(`Listening on port ${port}`));
