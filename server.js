@@ -29,6 +29,10 @@ io.on("connection", socket => {
   socket.on("toggle highlighted", data => {
     socket.broadcast.to(data.token).emit("receive highlight", data);
   });
+
+  socket.on("toggle hide", data => {
+    socket.broadcast.to(data.token).emit("receive hide", data);
+  });
 });
 
 server.listen(port, () => console.log(`Listening on port ${port}`));
