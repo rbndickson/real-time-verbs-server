@@ -26,6 +26,10 @@ io.on("connection", socket => {
     socket.broadcast.to(data.token).emit("receive question", data);
   });
 
+  socket.on("show answer", data => {
+    socket.broadcast.to(data.token).emit("receive show answer", data);
+  });
+
   socket.on("toggle highlighted", data => {
     socket.broadcast.to(data.token).emit("receive highlight", data);
   });
